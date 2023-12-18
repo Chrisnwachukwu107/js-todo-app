@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body
+{
+    font-size: 16px;
+    font-family: Poppins;
+}
+.section-input
+{
+}
+
+.section-input
+{
+    background-color: rgb(29, 0, 66);
+}
+
+.task-input
+{
+    height: 2.5rem;
+    width: 20rem;
+    outline: none;
+    border: none;
+    border-radius: .25rem;
+}
+
+.section-todo
+{
+    background-color: aqua;
+    height: 400px;
+}
+
+li > *
+{
+    display: block;
+    font-size: 1.25rem;
+}
+
+li
+{
+    list-style-type: none;
+    width: 50rem;
+}
+
+.section-todo
+{
+    display: flex;
+}
+
+.todo-list
+{
+    flex: 70%;
+}
+
+.radio-mark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px; /* Adjust the width and height to increase the size of the radio button */
+    height: 20px;
+    border: 2px solid #333; /* Border color */
+    border-radius: 50%; /* Make it a circle */
+    background-color: #fff; /* Background color */
+    box-sizing: border-box;
+}
