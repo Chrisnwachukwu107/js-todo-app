@@ -1,31 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+*
+{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+}
 body
 {
     font-size: 16px;
     font-family: Poppins;
 }
-.section-input
+.bg-dark1
 {
+    background-color: rgb(13, 0, 30);
 }
-
-.section-input
+.bg-aqua1
 {
-    background-color: rgb(29, 0, 66);
+    background-color: rgb(212, 255, 255);
+}
+.bg-aqua2
+{
+    background-color: aqua;
 }
 
 .task-input
 {
     height: 2.5rem;
     width: 20rem;
-    outline: none;
-    border: none;
     border-radius: .25rem;
 }
 
 .section-todo
 {
-    background-color: aqua;
     height: 400px;
 }
 
@@ -38,28 +47,19 @@ li > *
 li
 {
     list-style-type: none;
-    width: 50rem;
+    /* width: 50rem; */
 }
 
-.section-todo
+/* .todo-list-ul, li
 {
-    display: flex;
-}
+    border: 5px solid red;
+} */
 
-.todo-list
+.btn-group button:nth-child(1):hover
 {
-    flex: 70%;
+    background-color: rgb(13, 0, 30);
 }
-
-.radio-mark {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 20px; /* Adjust the width and height to increase the size of the radio button */
-    height: 20px;
-    border: 2px solid #333; /* Border color */
-    border-radius: 50%; /* Make it a circle */
-    background-color: #fff; /* Background color */
-    box-sizing: border-box;
+.btn-group button:nth-child(2):hover
+{
+    background-color: aqua;
 }
