@@ -15,38 +15,49 @@
         <div class="container mb-4 div-today">
             <h2 class="h2 h2-today">Today</h2>
         </div>
+
         <div class="container task-div">
             <form action="" class="todo-form">
-                <input type="text" placeholder="e.g Buy groceries" class="px-3 task-input">
-                <button class="btn btn-warning text-white task-btn"><b>ADD TASK</b></button>
+                <input type="text" placeholder="e.g Buy groceries" class="px-3 task-input" data-bs-todo-add-task-input>
+                <button class="btn btn-warning text-white task-btn" type="button" data-bs-todo-add-task-btn><b>ADD TASK</b></button>
             </form>
         </div>
     </section>
 
-    <section class="container-fluid text-black text-center py-3 bg-aqua1 section-todo">
-            <div class="container d-flex justify-content-evenly">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn text-white bg-dark1">Remaining</button>
-                    <button type="button" class="btn text-white bg-aqua2"><b>0</b></button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn text-white bg-dark1">Completed</button>
-                    <button type="button" class="btn text-white bg-aqua2"><b>0</b></button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn text-white bg-dark1">Total</button>
-                    <button type="button" class="btn text-white bg-aqua2"><b>0</b></button>
-                </div>
+    <section class="container-fluid text-black text-center py-5 bg-aqua1 section-todo">
+        <div class="container d-flex justify-content-evenly mb-5">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn text-white bg-dark1">Remaining</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-remaining" data-bs-todo-remaining-task>0</button>
             </div>
-        <!-- <div class="container px-5 todo-list">
-            <ul class="todo-list-ul">
-                <li class="bg-white p-3 d-flex justify-content-between">
-                    <input type="radio" size="large" class="todo-radio text-start">
-                    <p class="text-center">Todo 1</p>
-                    <button class="btn text-end"><ion-icon name="close-outline" size="large"></ion-icon></button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn text-white bg-dark1">Completed</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-completed" data-bs-todo-completed-task>0</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn text-white bg-dark1">Total</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-total" data-bs-todo-total-task>0</button>
+            </div>
+        </div>
+
+        <div class="container col-sm-9 px-5 todo-list">
+            <ul class="todo-list-ul" data-bs-todo-list-ul>
+                <!-- <li class="bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between">
+                    <input type="checkbox" class="todo-checkbox">
+                    <p class="">Buy groceries</p>
+                    <button class="btn pt-0"><ion-icon name="close-outline" size="large"></ion-icon></button>
                 </li>
+                <li class="bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between">
+                    <input type="checkbox" class="todo-checkbox">
+                    <p class="">Go out for a walk</p>
+                    <button class="btn pt-0"><ion-icon name="close-outline" size="large"></ion-icon></button>
+                </li> -->
             </ul>
-        </div> -->
+        </div>
+
+        <div class="container">
+            <p class="mt-5 credits">Designed by <b><a href="https://twitter.com/progchris6002/">ProgrammerChris</a></b>. Code by <b><a href="https://twitter.com/progchris6002/">ProgrammerChris</a></b></p>
+        </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

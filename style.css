@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root
+{
+    --body-font: Poppins, sans-serif;
+
+    --color-text-muted: #a4d0e3;
+    --color-disabled: #d2e7f1;
+    --color-text-disabled: #77b8d4;
+    --global-transition: all .2s ease-in-out;
+}
+
 *
 {
     box-sizing: border-box;
@@ -35,7 +45,6 @@ body
 
 .section-todo
 {
-    height: 400px;
 }
 
 li > *
@@ -47,6 +56,7 @@ li > *
 li
 {
     list-style-type: none;
+    border-radius: .5rem;
     /* width: 50rem; */
 }
 
@@ -62,4 +72,46 @@ li
 .btn-group button:nth-child(2):hover
 {
     background-color: aqua;
+}
+
+input[type='checkbox']
+{
+    appearance: none;
+    background-color: transparent;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid black;
+    border-radius: 100%;
+    display: grid;
+    place-content: center;
+    transition: var(--global-transition);
+}
+
+input[type='checkbox']::before
+{
+    content: url("data:image/svg+xml,%3Csvg width='12' height='10' viewBox='0 0 12 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5 1L4.5 9L1.5 5.5' stroke='%2302E7F1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    transform: scale(0);
+    transition: var(--global-transition);
+}
+
+input[type='checkbox']:checked
+{
+    background-color: var(--color-text-disabled);
+    border-color: var(--color-text-disabled);
+}
+
+input[type='checkbox']:hover
+{
+    cursor: pointer;
+}
+
+input[type='checkbox']:checked::before
+{
+    transform: scale(1);
+}
+
+a
+{
+    text-decoration: none;
+    color: black;
 }
