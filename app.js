@@ -6,18 +6,10 @@ const remainingTodo = document.querySelector("[data-remaining-todo]");
 const completedTodo = document.querySelector("[data-completed-todo]");
 const totalTodo = document.querySelector("[data-total-todo]");
 const todoListUl = document.querySelector("[data-todo-list-ul]");
-const todoArray = [
-    // {
-    //     id: 0,
-    //     task: 'Chris',
-    //     completed: false,
-    // },
-    // {
-    //     id: 1,
-    //     task: 'James',
-    //     completed: true,
-    // },
-];
+
+if (!(localStorage.getItem("todoArray"))) localStorage.setItem('todoArray', JSON.stringify([]));
+const todoArray = JSON.parse(localStorage.getItem('todoArray'));
+renderTodos(todoArray);
 
 // Validate Task input
 function validateTodoInput(input)
@@ -33,17 +25,19 @@ function validateTodo()
     {
         addTodoP.classList.remove("d-block");
         addTodoP.classList.add("d-none");
-        addTodo(todoArray, inputIsValid[1]);
-        addTodoInput.value = "";
+        const isTodoValid = addTodo(todoArray, inputIsValid[1]);
+        if (isTodoValid) addTodoInput.value = "";
     }
     else
     {
+        addTodoP.firstChild.innerHTML = "Field cannot be empty!";
         addTodoP.classList.remove("d-none");
         addTodoP.classList.add("d-block");
     }
 }
 
-const clearTodos = ul => {
+function clearTodos (ul)
+{
     while (ul.firstChild) ul.removeChild(ul.firstChild);
 }
 
@@ -77,19 +71,35 @@ function renderTodos(array)
         todoListUl.appendChild(todo);
     });
 
-    remainingTodo.innerHTML = remainingCount;
-    completedTodo.innerHTML = completedCount;
-    totalTodo.innerHTML = array.length;
+    remainingTodo.firstChild.innerHTML = remainingCount;
+    completedTodo.firstChild.innerHTML = completedCount;
+    totalTodo.firstChild.innerHTML = array.length;
 }
 
 function addTodo(array, task)
 {
+    let flag = false;
+    array.forEach(element =>
+        {
+            if (task.toLowerCase() === element.task.toLowerCase())
+            {
+                addTodoP.firstChild.innerHTML = "Task already exists!";
+                addTodoP.classList.remove("d-none");
+                addTodoP.classList.add("d-block");
+                flag = true;
+            }
+        });
+
+    if (flag) return (false);
     array.push({
         id: array.length,
-        task: task,
+        task: `${task[0].toUpperCase()}${task.slice(1)}`,
         completed: false,
     });
+
+    localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);
+    return (true);
 }
 
 function deleteTodo(array, element)
@@ -97,6 +107,14 @@ function deleteTodo(array, element)
     const task = element.innerHTML.split('input type="checkbox" class="todo-checkbox">')[1].split('>')[1].split("[a-zA-Z0-9]")[0].split("<")[0];
     const index = array.findIndex(obj => obj.task === task);
     array.splice(index, 1);
+    localStorage.setItem('todoArray', JSON.stringify(array));
+    renderTodos(array);
+}
+
+function deleteTodoList(array)
+{
+    array.splice(0, array.length);
+    localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);
 }
 
@@ -107,6 +125,17 @@ function completeTodo(array, element)
 
     if (array[index].completed) array[index].completed = false
     else array[index].completed = true;
+
+    localStorage.setItem('todoArray', JSON.stringify(array));
+    renderTodos(array);
+}
+
+function completeTodoList(array)
+{
+    if (array.every(element => element.completed === true)) array.map(element => element.completed = false)
+    else array.map(element => element.completed = true);
+
+    localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);
 }
 
@@ -123,5 +152,3 @@ todoListUl.addEventListener("click", (e)=>
     else if (e.target.parentElement.className === "btn pt-0 todo-btn") deleteTodo(todoArray, e.target.parentElement.parentElement)
     else if (e.target.className === "todo-checkbox") completeTodo(todoArray, e.target.parentElement);
 });
-
-document.addEventListener("load", renderTodos(todoArray));

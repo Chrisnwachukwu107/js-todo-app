@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+<!-- onload="renderLocalStorage(); renderTodos();" -->
 <body>
     <section class="container-fluid text-white text-center py-5 bg-dark1 section-input">
         <div class="container mb-4 div-today">
@@ -20,7 +21,7 @@
             <form action="" class="todo-form" data-add-todo-form>
                 <input type="text" placeholder="e.g Buy groceries" class="px-3 task-input" data-add-todo-input>
                 <button class="btn btn-warning text-white task-btn" type="button" data-add-todo-btn><b>ADD TASK</b></button>
-                <p class="mt-3 text-danger d-none" data-add-todo-p><b>Field cannot be empty</b></p>
+                <p class="mt-3 text-danger d-none" data-add-todo-p><b></b></p>
             </form>
         </div>
     </section>
@@ -29,15 +30,15 @@
         <div class="container d-flex justify-content-evenly mb-5">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn text-white bg-dark1">Remaining</button>
-                <button type="button" class="btn text-white bg-aqua2 btn-remaining" data-remaining-todo>0</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-remaining" data-remaining-todo><b>0</b></button>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn text-white bg-dark1">Completed</button>
-                <button type="button" class="btn text-white bg-aqua2 btn-completed" data-completed-todo>0</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-completed" data-completed-todo><b>0</b></button>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn text-white bg-dark1">Total</button>
-                <button type="button" class="btn text-white bg-aqua2 btn-total" data-total-todo>0</button>
+                <button type="button" class="btn text-white bg-aqua2 btn-total" data-total-todo><b>0</b></button>
             </div>
         </div>
 
