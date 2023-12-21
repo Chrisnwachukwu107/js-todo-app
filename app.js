@@ -14,52 +14,66 @@ function validateTaskInput(input)
 }
 
 // Create new Task
-function createTodo(task)
+function createTodo(isValid)
+{
+    if (isValid[0])
+    {
+        const todoObject = {
+            id: todoArray.length,
+            task: isValid[1],
+            completed: false,
+            line: this.completed ? 'line-through' : 'none',
+        }
+        totalTask.innerHTML++;
+        remainingTask.innerHTML++;
+        todoArray.push(todoObject);
+        return (todoObject);
+    }
+    return (null); // display an error is !isValid
+}
+
+// Display Task on webpage
+function displayTodo(task, ul)
 {
     const todo = document.createElement("li");
     const todoCheckbox = document.createElement("input");
     const todoP = document.createElement("p");
     const todoBtn = document.createElement("button");
-    const todoObject = {
-        id: todoArray.length + 1,
-        checked: false,
-        task: task,
-        line: 'none',
-        completed: false,
-    }
-    
+    const index = todoArray.findIndex((obj => obj.task === task));
+
     todoCheckbox.type = "checkbox";
-    todoCheckbox.checked = false;
+    todoCheckbox.checked = todoArray[index].completed;
     todoCheckbox.classList = "todo-checkbox";
-    todoP.innerHTML = task;
+    todoP.innerHTML = todoArray[index].task;
     todoP.classList = 'todo-p';
-    // todoP.style.textDecoration = 'line-through';
+    todoP.style.textDecoration = todoArray[index].line;
     todoBtn.innerHTML = `<ion-icon name="close-outline" size="large"></ion-icon>`;
     todoBtn.classList = "btn pt-0 todo-btn";
     todo.classList = "bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between";
-    
+
     todo.appendChild(todoCheckbox);
     todo.appendChild(todoP);
     todo.appendChild(todoBtn);
-    todoArray.push(todoObject);
-    return (todo);
-}
-
-// Add Task to List
-function addTodo(isValid, ul)
-{
-    if (isValid[0])
-    {
-        const todo = createTodo(isValid[1]);
-        ul.appendChild(todo);
-        totalTask.innerHTML++;
-        remainingTask.innerHTML++;
-    }
+    ul.appendChild(todo);
 }
 
 // Complete Task in List
-function completeTodo()
-{}
+function completeTodo(li)
+{
+    let task = '';
+    const array = li.innerHTML.split('<p class="todo-p" style="text-decoration: none;">');
+    console.log(array[1]);
+    for (let i = 0 ; i < array[1].length ; i++)
+    {
+        if (array[1][i] !== '<') task += array[0][i];
+        else break;
+    }
+    console.log(task);
+    const index = todoArray.findIndex((obj => obj.task === task));
+    console.log(index);
+    todoArray[index].completed = true;
+    todoArray[index].line = 'line-through';
+}
 
 // Delete Task from List
 function deleteTodo()
@@ -69,7 +83,8 @@ function deleteTodo()
 addTaskBtn.addEventListener("click", ()=>
 {
     const inputIsValid = validateTaskInput(addTaskInput);
-    addTodo(inputIsValid, todoListUl);
+    const todoObject = createTodo(inputIsValid);
+    displayTodo(todoObject.task, todoListUl);
     addTaskInput.value = "";
     console.log(todoArray);
 });
@@ -78,7 +93,7 @@ todoListUl.addEventListener("click", (e)=>
 {
     if (e.target.classList[e.target.classList.length - 1] === 'todo-checkbox')
     {
-        completeTodo();
+        completeTodo(e.target.parentElement);
     }
     else if (e.target.classList[e.target.classList.length - 1] === 'todo-btn') 
     {
