@@ -7,16 +7,16 @@ const completedTodo = document.querySelector("[data-completed-todo]");
 const totalTodo = document.querySelector("[data-total-todo]");
 const todoListUl = document.querySelector("[data-todo-list-ul]");
 const todoArray = [
-    {
-        id: 0,
-        task: 'Chris',
-        completed: false,
-    },
-    {
-        id: 1,
-        task: 'James',
-        completed: true,
-    },
+    // {
+    //     id: 0,
+    //     task: 'Chris',
+    //     completed: false,
+    // },
+    // {
+    //     id: 1,
+    //     task: 'James',
+    //     completed: true,
+    // },
 ];
 
 // Validate Task input
