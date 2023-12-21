@@ -1,106 +1,127 @@
-const addTaskInput = document.querySelector("[data-bs-todo-add-task-input]");
-const addTaskBtn = document.querySelector("[data-bs-todo-add-task-btn]");
-const remainingTask = document.querySelector("[data-bs-todo-remaining-task]");
-const completedTask = document.querySelector("[data-bs-todo-completed-task]");
-const totalTask = document.querySelector("[data-bs-todo-total-task]");
-const todoListUl = document.querySelector("[data-bs-todo-list-ul]");
-const todoArray = [];
+const addTodoForm = document.querySelector("[data-add-todo-form]");
+const addTodoInput = document.querySelector("[data-add-todo-input]");
+const addTodoBtn = document.querySelector("[data-add-todo-btn]");
+const addTodoP = document.querySelector("[data-add-todo-p]");
+const remainingTodo = document.querySelector("[data-remaining-todo]");
+const completedTodo = document.querySelector("[data-completed-todo]");
+const totalTodo = document.querySelector("[data-total-todo]");
+const todoListUl = document.querySelector("[data-todo-list-ul]");
+const todoArray = [
+    {
+        id: 0,
+        task: 'Chris',
+        completed: false,
+    },
+    {
+        id: 1,
+        task: 'James',
+        completed: true,
+    },
+];
 
 // Validate Task input
-function validateTaskInput(input)
+function validateTodoInput(input)
 {
     if (input.value.trim().length === 0) return ([ false, null ]);
     return ([ true, input.value.trim() ]);
 }
 
-// Create new Task
-function createTodo(isValid)
+function validateTodo()
 {
-    if (isValid[0])
+    const inputIsValid = validateTodoInput(addTodoInput);
+    if (inputIsValid[0])
     {
-        const todoObject = {
-            id: todoArray.length,
-            task: isValid[1],
-            completed: false,
-            line: this.completed ? 'line-through' : 'none',
-        }
-        totalTask.innerHTML++;
-        remainingTask.innerHTML++;
-        todoArray.push(todoObject);
-        return (todoObject);
+        addTodoP.classList.remove("d-block");
+        addTodoP.classList.add("d-none");
+        addTodo(todoArray, inputIsValid[1]);
+        addTodoInput.value = "";
     }
-    return (null); // display an error is !isValid
-}
-
-// Display Task on webpage
-function displayTodo(task, ul)
-{
-    const todo = document.createElement("li");
-    const todoCheckbox = document.createElement("input");
-    const todoP = document.createElement("p");
-    const todoBtn = document.createElement("button");
-    const index = todoArray.findIndex((obj => obj.task === task));
-
-    todoCheckbox.type = "checkbox";
-    todoCheckbox.checked = todoArray[index].completed;
-    todoCheckbox.classList = "todo-checkbox";
-    todoP.innerHTML = todoArray[index].task;
-    todoP.classList = 'todo-p';
-    todoP.style.textDecoration = todoArray[index].line;
-    todoBtn.innerHTML = `<ion-icon name="close-outline" size="large"></ion-icon>`;
-    todoBtn.classList = "btn pt-0 todo-btn";
-    todo.classList = "bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between";
-
-    todo.appendChild(todoCheckbox);
-    todo.appendChild(todoP);
-    todo.appendChild(todoBtn);
-    ul.appendChild(todo);
-}
-
-// Complete Task in List
-function completeTodo(li)
-{
-    let task = '';
-    const array = li.innerHTML.split('<p class="todo-p" style="text-decoration: none;">');
-    console.log(array[1]);
-    for (let i = 0 ; i < array[1].length ; i++)
+    else
     {
-        if (array[1][i] !== '<') task += array[0][i];
-        else break;
+        addTodoP.classList.remove("d-none");
+        addTodoP.classList.add("d-block");
     }
-    console.log(task);
-    const index = todoArray.findIndex((obj => obj.task === task));
-    console.log(index);
-    todoArray[index].completed = true;
-    todoArray[index].line = 'line-through';
 }
 
-// Delete Task from List
-function deleteTodo()
-{
+const clearTodos = ul => {
+    while (ul.firstChild) ul.removeChild(ul.firstChild);
 }
 
-addTaskBtn.addEventListener("click", ()=>
+function renderTodos(array)
 {
-    const inputIsValid = validateTaskInput(addTaskInput);
-    const todoObject = createTodo(inputIsValid);
-    displayTodo(todoObject.task, todoListUl);
-    addTaskInput.value = "";
-    console.log(todoArray);
+    clearTodos(todoListUl);
+    let remainingCount = 0, completedCount = 0;
+
+    array.forEach(element => {
+        const todo = document.createElement("li");
+        const todoCheckbox = document.createElement("input");
+        const todoP = document.createElement("p");
+        const todoBtn = document.createElement("button");
+
+        todoCheckbox.type = "checkbox";
+        todoCheckbox.checked = element.completed;
+        todoCheckbox.classList.add("todo-checkbox");
+        todoP.innerHTML = element.task;
+        todoP.classList.add("todo-p");
+        todoP.style.textDecoration = element.completed ? "line-through" : "none";
+        todoBtn.innerHTML = `<ion-icon name="close-outline" size="large"></ion-icon>`;
+        todoBtn.classList = "btn pt-0 todo-btn";
+        todo.classList = "bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between";
+
+        if (element.completed) completedCount++;
+        else remainingCount++;
+
+        todo.appendChild(todoCheckbox);
+        todo.appendChild(todoP);
+        todo.appendChild(todoBtn);
+        todoListUl.appendChild(todo);
+    });
+
+    remainingTodo.innerHTML = remainingCount;
+    completedTodo.innerHTML = completedCount;
+    totalTodo.innerHTML = array.length;
+}
+
+function addTodo(array, task)
+{
+    array.push({
+        id: array.length,
+        task: task,
+        completed: false,
+    });
+    renderTodos(array);
+}
+
+function deleteTodo(array, element)
+{
+    const task = element.innerHTML.split('input type="checkbox" class="todo-checkbox">')[1].split('>')[1].split("[a-zA-Z0-9]")[0].split("<")[0];
+    const index = array.findIndex(obj => obj.task === task);
+    array.splice(index, 1);
+    renderTodos(array);
+}
+
+function completeTodo(array, element)
+{
+    const task = element.innerHTML.split('input type="checkbox" class="todo-checkbox">')[1].split('>')[1].split("[a-zA-Z0-9]")[0].split("<")[0];
+    const index = array.findIndex(obj => obj.task === task);
+
+    if (array[index].completed) array[index].completed = false
+    else array[index].completed = true;
+    renderTodos(array);
+}
+
+addTodoBtn.addEventListener("click", ()=> validateTodo());
+addTodoForm.addEventListener("submit", (e)=>
+{
+    e.preventDefault();
+    validateTodo();
 });
 
 todoListUl.addEventListener("click", (e)=>
 {
-    if (e.target.classList[e.target.classList.length - 1] === 'todo-checkbox')
-    {
-        completeTodo(e.target.parentElement);
-    }
-    else if (e.target.classList[e.target.classList.length - 1] === 'todo-btn') 
-    {
-        deleteTodo();
-    }
-    else if (e.target.parentElement.classList[e.target.parentElement.classList.length - 1] === 'todo-btn')
-    {
-        deleteTodo();
-    }
+    if (e.target.className === "btn pt-0 todo-btn") deleteTodo(todoArray, e.target.parentElement)
+    else if (e.target.parentElement.className === "btn pt-0 todo-btn") deleteTodo(todoArray, e.target.parentElement.parentElement)
+    else if (e.target.className === "todo-checkbox") completeTodo(todoArray, e.target.parentElement);
 });
+
+document.addEventListener("load", renderTodos(todoArray));
