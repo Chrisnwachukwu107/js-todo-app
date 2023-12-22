@@ -98,7 +98,7 @@ function renderTodos(array)
         todoP.style.textDecoration = element.completed ? "line-through" : "none";
         todoBtn.innerHTML = `<ion-icon name="close-outline" size="large"></ion-icon>`;
         todoBtn.classList = "btn pt-0 todo-btn";
-        todo.classList = "bg-white p-3 pt-4 pb-2 mb-3 d-flex justify-content-between";
+        todo.classList = "bg-white p-3 pt-4 pb-2 me-5 ms-3 mb-3 d-flex justify-content-between";
 
         if (element.completed) completedCount++;
         else remainingCount++;
