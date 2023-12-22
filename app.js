@@ -13,8 +13,6 @@ const pCredits = document.querySelector("[data-p-credits]");
 if (!(localStorage.getItem("todoArray"))) localStorage.setItem('todoArray', JSON.stringify([]));
 const todoArray = JSON.parse(localStorage.getItem('todoArray'));
 renderTodos(todoArray);
-displayCurrentYear(pCredits.firstChild);
-console.log(pCredits.firstChild)
 
 function displayCurrentYear(b)
 {
@@ -23,7 +21,6 @@ function displayCurrentYear(b)
     b.innerHTML = `&copy; ${year}`;
 }
 
-// Validate Task input
 function validateTodoInput(input)
 {
     if (input.value.trim().length === 0) return ([ false, null ]);
@@ -48,6 +45,8 @@ function validateTodo(array)
     }
     renderTodos(array);
 }
+
+const storeArray = (array) => localStorage.setItem('todoArray', JSON.stringify(array));
 
 function clearTodos (ul)
 {
@@ -111,6 +110,8 @@ function renderTodos(array)
     });
 
     renderBtn(array);
+    checkTodos(array);
+    displayCurrentYear(pCredits.firstChild);
     remainingTodo.firstChild.innerHTML = remainingCount;
     completedTodo.firstChild.innerHTML = completedCount;
     totalTodo.firstChild.innerHTML = array.length;
@@ -138,7 +139,7 @@ function addTodo(array, task)
     });
 
     checkTodos(array);
-    localStorage.setItem('todoArray', JSON.stringify(array));
+    storeArray(array);
     renderTodos(array);
     return (true);
 }
@@ -150,14 +151,14 @@ function deleteTodo(array, element)
     array.splice(index, 1);
 
     checkTodos(array);
-    localStorage.setItem('todoArray', JSON.stringify(array));
+    storeArray(array);
     renderTodos(array);
 }
 
 function deleteTodoList(array)
 {
     array.splice(0, array.length);
-    localStorage.setItem('todoArray', JSON.stringify(array));
+    storeArray(array);
     renderTodos(array);
 }
 
@@ -170,8 +171,7 @@ function completeTodo(array, element)
     else array[index].completed = true;
 
     checkTodos(array);
-
-    localStorage.setItem('todoArray', JSON.stringify(array));
+    storeArray(array);
     renderTodos(array);
 }
 
@@ -188,7 +188,7 @@ function completeTodoList(array, btn)
         btn.innerHTML = "Uncheck All Tasks";
     }
 
-    localStorage.setItem('todoArray', JSON.stringify(array));
+    storeArray(array);
     renderTodos(array);
 }
 
