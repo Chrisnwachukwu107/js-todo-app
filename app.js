@@ -8,10 +8,20 @@ const totalTodo = document.querySelector("[data-total-todo]");
 const completeTodoListBtn = document.querySelector("[data-complete-todo-list-btn]");
 const deleteTodoListBtn = document.querySelector("[data-delete-todo-list-btn]");
 const todoListUl = document.querySelector("[data-todo-list-ul]");
+const pCredits = document.querySelector("[data-p-credits]");
 
 if (!(localStorage.getItem("todoArray"))) localStorage.setItem('todoArray', JSON.stringify([]));
 const todoArray = JSON.parse(localStorage.getItem('todoArray'));
 renderTodos(todoArray);
+displayCurrentYear(pCredits.firstChild);
+console.log(pCredits.firstChild)
+
+function displayCurrentYear(b)
+{
+    const now = new Date();
+    const year = now.getFullYear();
+    b.innerHTML = `&copy; ${year}`;
+}
 
 // Validate Task input
 function validateTodoInput(input)
@@ -42,6 +52,12 @@ function validateTodo(array)
 function clearTodos (ul)
 {
     while (ul.firstChild) ul.removeChild(ul.firstChild);
+}
+
+function checkTodos(array)
+{
+    if (array.every(element => element.completed === true)) completeTodoListBtn.innerHTML = "Uncheck All Tasks";
+    else completeTodoListBtn.innerHTML = "Check All Tasks";
 }
 
 function renderBtn(array)
@@ -121,6 +137,7 @@ function addTodo(array, task)
         completed: false,
     });
 
+    checkTodos(array);
     localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);
     return (true);
@@ -131,6 +148,8 @@ function deleteTodo(array, element)
     const task = element.innerHTML.split('input type="checkbox" class="todo-checkbox">')[1].split('>')[1].split("[a-zA-Z0-9]")[0].split("<")[0];
     const index = array.findIndex(obj => obj.task === task);
     array.splice(index, 1);
+
+    checkTodos(array);
     localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);
 }
@@ -150,8 +169,7 @@ function completeTodo(array, element)
     if (array[index].completed) array[index].completed = false
     else array[index].completed = true;
 
-    if (array.every(element => element.completed === true)) completeTodoListBtn.innerHTML = "Uncheck All Tasks";
-    else completeTodoListBtn.innerHTML = "Check All Tasks";
+    checkTodos(array);
 
     localStorage.setItem('todoArray', JSON.stringify(array));
     renderTodos(array);

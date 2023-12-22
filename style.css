@@ -36,15 +36,11 @@ body
     background-color: aqua;
 }
 
-.task-input
+.todo-input
 {
     height: 2.5rem;
     width: 20rem;
     border-radius: .25rem;
-}
-
-.section-todo
-{
 }
 
 li > *
@@ -57,13 +53,7 @@ li
 {
     list-style-type: none;
     border-radius: .5rem;
-    /* width: 50rem; */
 }
-
-/* .todo-list-ul, li
-{
-    border: 5px solid red;
-} */
 
 .btn-group button:nth-child(1):hover
 {
@@ -114,4 +104,16 @@ a
 {
     text-decoration: none;
     color: black;
+}
+
+.credits
+{
+    font-weight: 500;
+}
+
+@media screen and (max-width:375px) {
+    .todo-input
+    {
+        width: 15rem;
+    }
 }
