@@ -18,7 +18,7 @@
         </div>
 
         <div class="container task-div">
-            <form action="" class="todo-form" data-add-todo-form>
+            <form action="" class="todo-form" id="todo-form" data-add-todo-form>
                 <input type="text" placeholder="e.g Buy groceries" class="px-3 task-input" data-add-todo-input>
                 <button class="btn btn-warning text-white task-btn" type="button" data-add-todo-btn><b>ADD TASK</b></button>
                 <p class="mt-3 text-danger d-none" data-add-todo-p><b></b></p>
@@ -45,6 +45,11 @@
         <div class="container col-12 col-sm-12 col-md-10 px-5 todo-list">
             <ul class="todo-list-ul" data-todo-list-ul>
             </ul>
+        </div>
+
+        <div class="container d-flex justify-content-around my-5">
+            <button type="button" class="btn btn-success text-white d-none" data-complete-todo-list-btn>Check All Tasks</button>
+            <button type="button" class="btn btn-danger text-white d-none" data-delete-todo-list-btn>Delete All Tasks</button>
         </div>
 
         <div class="container">
