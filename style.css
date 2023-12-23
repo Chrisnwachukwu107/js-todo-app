@@ -23,6 +23,7 @@ body
     font-size: 16px;
     font-family: Poppins;
 }
+
 .bg-dark1
 {
     background-color: rgb(13, 0, 30);
@@ -37,14 +38,52 @@ body
 }
 .bg-aqua3
 {
-    background-color: #00008B;
+    background-color: #103075;
+}
+.bg-white2
+{
+    background-color: #f5f7f8;
+}
+.bg-warning2
+{
+    background-color: #f3cb7d;
 }
 
-.todo-input
+.text-aqua3
+{
+    color: #103075;
+}
+.text-white2
+{
+    color: #f5f7f8;
+}
+.text-warning2
+{
+    color: #f3cb7d;
+}
+
+.add-todo-input
 {
     height: 2.5rem;
     width: 20rem;
     border-radius: .25rem;
+}
+
+.add-todo-btn
+{
+    border: 2px solid #ffc107;
+    border-radius: 1.5rem;
+}
+
+.complete-todo-list-btn, .delete-todo-list-btn
+{
+    border: 2px solid #000000;
+    border-radius: 1.5rem;
+}
+.complete-todo-list-btn:hover, .delete-todo-list-btn:hover
+{
+    background-color: black;
+    color: white;
 }
 
 li > *
@@ -63,13 +102,9 @@ li
 {
     background-color: rgb(13, 0, 30);
 }
-.btn-group button:nth-child(2):hover
+.btn-group button:nth-child(2):hover, .add-todo-btn:hover
 {
-    background-color: aqua;
-}
-.delete-todo-list-btn:hover, .complete-todo-list-btn:hover
-{
-    background-color: rgb(13, 0, 30, .8);
+    background-color: #ffc107;
 }
 
 input[type='checkbox']
@@ -110,7 +145,7 @@ input[type='checkbox']:checked::before
 
 .section-todo
 {
-    border-bottom: 5px solid #00008B;
+    border-bottom: 3px solid #00008B;
 }
 
 a
@@ -125,7 +160,7 @@ a
 }
 
 @media screen and (max-width:375px) {
-    .todo-input
+    .add-todo-input
     {
         width: 15rem;
     }
