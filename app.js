@@ -94,11 +94,11 @@ function renderTodos(array)
         todoCheckbox.checked = element.completed;
         todoCheckbox.classList.add("todo-checkbox");
         todoP.innerHTML = element.task;
-        todoP.classList.add("todo-p");
+        todoP.classList = "mx-auto todo-p";
         todoP.style.textDecoration = element.completed ? "line-through" : "none";
         todoBtn.innerHTML = `<ion-icon name="close-outline" size="large"></ion-icon>`;
         todoBtn.classList = "btn pt-0 todo-btn";
-        todo.classList = "bg-white p-3 pt-4 pb-2 me-5 ms-3 mb-3 d-flex justify-content-between";
+        todo.classList = "container-fluid bg-white p-3 pt-4 pb-2 m-0 me-sm-5 ms-sm-3 mb-3 d-flex justify-content-between";
 
         if (element.completed) completedCount++;
         else remainingCount++;

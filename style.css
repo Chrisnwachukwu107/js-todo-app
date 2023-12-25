@@ -89,7 +89,7 @@ body
 li > *
 {
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
 }
 
 li
@@ -157,6 +157,13 @@ a
 .credits
 {
     font-weight: 500;
+}
+
+@media screen and (max-width:576px) {
+    .todo-p
+    {
+        font-size: 1.05rem;
+    }
 }
 
 @media screen and (max-width:375px) {
